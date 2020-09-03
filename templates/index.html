@@ -98,10 +98,10 @@
                   'Content-Type': 'application/json'
                 }
               })
-              .then(function(response){
+              .then(function(response) {
                 return response.json();
               })
-              .then(function(jsonResponse){
+              .then(function(jsonResponse) {
                 console.log(jsonResponse);
                 const liItem = document.createElement('LI');
                 liItem.innerHTML = jsonResponse['description'];
