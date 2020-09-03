@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request, abort, url_for, jsonify
+from flask import Flask, render_template, request, abort, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import sys
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://THEJAGSTER@localhost:5432/todoapp'
-app.config['SQLALCHEMY_TRACK_DATABASE_URI'] = False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
@@ -21,6 +21,10 @@ class Todo(db.Model):
         return f'<Todo {self.id} {self.description}>'
 
 # db.create_all()  We don't need this line since we are using migrations.
+
+# note: more conventionally, we would write a
+# POST endpoint to /todos for the create endpoint:
+# @app.route('/todos', method=['POST'])
 
 @app.route('/todos/create', methods=["POST"])
 def create_todo():
