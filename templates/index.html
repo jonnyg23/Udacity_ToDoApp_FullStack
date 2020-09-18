@@ -39,12 +39,15 @@
           <ul id="lists">
             {% for list in lists %}
             <li>
-              <a href="/lists/{{ list.id }}"></a>
+              <a href="/lists/{{ list.id }}">
+                {{ list.name }}
+              </a>
             </li>
             {% endfor %}
           </ul>
         </div>
         <div class="todos-wrapper">
+          <h4>{{ active_list.name }}</h4>
           <!--Sending data via Ajax Fetch-->
           <form id="form">
             <input type="text" id="description" name="description" />
