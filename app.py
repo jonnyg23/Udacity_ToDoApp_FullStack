@@ -79,7 +79,7 @@ def update_todo(todo_id):
   else:
       return redirect(url_for('index'))
 
-@app.route('/todos/todo_id>/delete', methods=['DELETE'])
+@app.route('/todos/<todo_id>/delete', methods=['DELETE'])
 def delete_todo(todo_id):
   error = False
   try:
