@@ -138,6 +138,28 @@
               }
             }
 
+            deleteBtns = document.querySelectorAll(".delete-todo");
+
+            for (let i = 0; i < deleteBtns.length; i++) {
+              const deleteBtn = deleteBtns[i];
+              deleteBtn.onclick = function(e) {
+                console.log("Delete event: ", e);
+                const todoId = e.target.dataset.id;
+                fetch('/todos/'+ todoId + '/delete',{
+                  method: 'DELETE'
+                }).then(function() {
+                  console.log('Parent?', e.target);
+                  const item = e.target.parentElement;
+                  item.remove();
+                  document.getElementById("error").className = "hidden";
+                })
+                .catch(function(e) {
+                  console.error(e);
+                  document.getElementById("error").className = "";
+                });
+              };
+            }
+
             deleteListBtns = document.querySelectorAll(".delete-list");
 
             for (let i = 0; i < deleteListBtns.length; i++) {
