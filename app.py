@@ -64,21 +64,21 @@ def create_todo():
 def update_todo(todo_id):
   error = False
   try:
-      complete = request.get_json()['complete']
-      todo = Todo.query.get(todo_id)
-      print('Todo: ', todo)
-      todo.complete = complete
-      db.session.commit()
+    complete = request.get_json()['complete']
+    todo = Todo.query.get(todo_id)
+    print('Todo: ', todo)
+    todo.complete = complete
+    db.session.commit()
   except():
-      db.session.rollback()
-      error = True
-      print(sys.exc_info())
+    db.session.rollback()
+    error = True
+    print(sys.exc_info())
   finally:
-      db.session.close()
+    db.session.close()
   if error:
-      abort(500)
+    abort(500)
   else:
-      return redirect(url_for('index'))
+    return redirect(url_for('index'))
 
 @app.route('/todos/<todo_id>/delete', methods=['DELETE'])
 def delete_todo(todo_id):
@@ -176,23 +176,23 @@ def set_completed_list(list_id):
   error = False
 
   try:
-      list = TodoList.query.get(list_id)
+    list = TodoList.query.get(list_id)
 
-      for todo in list.todos:
-          todo.completed = True
+    for todo in list.todos:
+        todo.completed = True
 
-      db.session.commit()
+    db.session.commit()
   except:
-      db.session.rollback()
+    db.session.rollback()
 
-      error = True
+    error = True
   finally:
-      db.session.close()
+    db.session.close()
 
   if error:
-      abort(500)
+    abort(500)
   else:
-      return '', 200
+    return '', 200
 
 
 if __name__ == '__main__':
