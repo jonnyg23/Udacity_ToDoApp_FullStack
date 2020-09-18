@@ -42,20 +42,21 @@ def create_todo():
   body = {}
   try:
     description = request.get_json()['description']
-    todo = Todo(description=description, completed=False)
+    list_id = request.get_json()['list_id']
+    todo = Todo(description=description, completed=False, list_id=list_id)
     db.session.add(todo)
     db.session.commit()
     body['id'] = todo.id
     body['completed'] = todo.completed
     body['description'] = todo.description
   except:
-    error = True
     db.session.rollback()
+    error = True
     print(sys.exc_info())
   finally:
     db.session.close()
   if error:
-    abort (400)
+    abort (500)
   else:
     return jsonify(body)
 
