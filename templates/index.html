@@ -35,13 +35,20 @@
 		  <input type="text" name="description" />
 		  <input type="submit" value="Create" />
         </form>-->
+        <h3>A SAMPLE VERSION OF TODO APP</h3>
         <div class="lists-wrapper">
+            <h4>TODO LISTS</h4>
+            <form action="/lists/create" method="POST" id="list-form">
+              <label for="todolist">Create List:</label>
+              <input type="text" name="todolist" id="todolist-input" placeholder="A new List" data-id="{{ active_list.id }}"/>
+              <button type="submit">Create List</button>
+            </form>
           <ul id="lists">
             {% for list in lists %}
             <li>
-              <a href="/lists/{{ list.id }}">
-                {{ list.name }}
-              </a>
+              <input type="checkbox" data-id="{{ list.id }}" class="list-check-completed">
+              <a href="/lists/{{ list.id }}">{{ list.name }}</a>
+              <button class="delete-list" data-id="{{ list.id }}">&cross;</button>
             </li>
             {% endfor %}
           </ul>
